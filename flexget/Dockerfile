@@ -26,11 +26,12 @@ ADD config.yml /config.yml
 RUN add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
     add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
     apt-get update -qq && \
-    apt-get install -qq --force-yes python2.7 python-dev python-pip python-transmissionrpc wget && \
+    apt-get install -qq --force-yes python2.7 python-dev python-pip python-transmissionrpc libav-tools ubuntu-restricted-extras libavcodec-extra-54 libavformat-extra-54 wget && \
     apt-get autoremove && \
     apt-get autoclean && \
     pip install flexget && \ 
     pip install --upgrade six>=1.70 && \
+    pip install --upgrade youtube_dl \
     ln -sf /config /root/.flexget
     
 
@@ -38,7 +39,8 @@ VOLUME /config
 
 # Add firstrun.sh to runit
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
-RUN chmod +x /etc/my_init.d/firstrun.sh
+RUN chmod +x /etc/my_init.d/firstrun.sh \
+    chmod a+rx /usr/local/bin/youtube-dl
 
 # Add flexget to runit
 RUN mkdir /etc/service/flexget
