@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.16
-MAINTAINER smdion <me@seandion.com>
+MAINTAINER tommyk1210 <email@tomkent.me>
 
 ENV DEBIAN_FRONTEND noninteractive
 
